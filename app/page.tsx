@@ -1,8 +1,9 @@
 "use client"
 
 import React, { FC, useState, useEffect } from "react"
+import ThemeToggle from "./components/ThemeToggle"
 
-interface DataPoint {
+type DataPoint = {
   id: string
   timestamp: Date
   status: "good" | "normal" | "bad"
@@ -85,114 +86,41 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
   return (
     <div
       style={{
-        maxWidth: "900px",
-        margin: "0 auto",
-        padding: "20px",
-        fontFamily:
-          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-        background: "#f8f9fa",
-        borderRadius: "12px",
+        background: "var(--bg-secondary)",
+        borderRadius: "1rem",
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        maxWidth: "72rem",
+        padding: "1rem",
       }}
     >
       <h2
         style={{
           textAlign: "center",
-          color: "#333",
-          marginBottom: "20px",
-          fontSize: "24px",
+          color: "var(--text-primary)",
+          fontSize: "1.5rem",
           fontWeight: "600",
         }}
       >
-        データモニタリング - 一次元確率表示
+        Aroma Alert モニタリング
       </h2>
 
-      <div style={{ marginTop: "20px" }}>
-        <div
-          style={{
-            background: "#f8f9fa",
-            borderRadius: "12px",
-            padding: "15px",
-            border: "1px solid #dee2e6",
-          }}
-        >
-          <h3
-            style={{
-              margin: "0 0 12px 0",
-              color: "#333",
-              fontSize: "16px",
-              fontWeight: "600",
-            }}
-          >
-            閾値設定
-          </h3>
-          <div
-            style={{
-              display: "flex",
-              gap: "15px",
-              flexWrap: "wrap",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "6px 10px",
-                borderRadius: "6px",
-                fontSize: "14px",
-                background: "#e8f5e8",
-                color: "#155724",
-              }}
-            >
-              <span>Good:</span> <strong>0% - 33%</strong>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "6px 10px",
-                borderRadius: "6px",
-                fontSize: "14px",
-                background: "#fff8e1",
-                color: "#856404",
-              }}
-            >
-              <span>Normal:</span> <strong>34% - 65%</strong>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "6px 10px",
-                borderRadius: "6px",
-                fontSize: "14px",
-                background: "#fdf2f2",
-                color: "#721c24",
-              }}
-            >
-              <span>Bad:</span> <strong>66% - 100%</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div style={{ marginTop: "20px" }}>
+      <div>
         {dataPoints.length > 0 && (
           <div
             style={{
-              background: "white",
+              background: "var(--bg-tertiary)",
               borderRadius: "12px",
               padding: "20px",
-              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-              border: "1px solid #e0e0e0",
+              boxShadow: "0 4px 12px var(--shadow-color)",
+              border: "1px solid var(--border-color)",
             }}
           >
             <h3
               style={{
                 margin: "0 0 15px 0",
-                color: "#333",
+                color: "var(--text-primary)",
                 fontSize: "18px",
                 fontWeight: "600",
               }}
@@ -216,16 +144,16 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
                     fontSize: "14px",
                     background:
                       dataPoints[0].status === "good"
-                        ? "#d4edda"
+                        ? "var(--status-good-bg)"
                         : dataPoints[0].status === "normal"
-                          ? "#ffe8a1"
-                          : "#f8d7da",
+                          ? "var(--status-normal-bg)"
+                          : "var(--status-bad-bg)",
                     color:
                       dataPoints[0].status === "good"
-                        ? "#155724"
+                        ? "var(--status-good-color)"
                         : dataPoints[0].status === "normal"
-                          ? "#856404"
-                          : "#721c24",
+                          ? "var(--status-normal-color)"
+                          : "var(--status-bad-color)",
                   }}
                 >
                   {dataPoints[0].status}
@@ -238,15 +166,15 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
                     alignItems: "center",
                     gap: "10px",
                     padding: "12px 16px",
-                    background: "#f8f9fa",
+                    background: "var(--bg-secondary)",
                     borderRadius: "8px",
-                    border: "1px solid #dee2e6",
+                    border: "1px solid var(--border-secondary)",
                   }}
                 >
                   <span
                     style={{
                       fontWeight: "500",
-                      color: "#666",
+                      color: "var(--text-secondary)",
                     }}
                   >
                     確率値:
@@ -255,7 +183,7 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
                     style={{
                       fontSize: "20px",
                       fontWeight: "bold",
-                      color: "#333",
+                      color: "var(--text-primary)",
                     }}
                   >
                     {dataPoints[0].probability.toFixed(1)}%
@@ -271,9 +199,9 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
         width={chartWidth}
         height={chartHeight}
         style={{
-          background: "white",
+          background: "var(--bg-tertiary)",
           borderRadius: "8px",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 4px 12px var(--shadow-color)",
         }}
       >
         <defs>
@@ -297,7 +225,7 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
           width={chartWidth - 2 * padding}
           height={chartHeight - 2 * padding}
           fill="none"
-          stroke="#e0e0e0"
+          stroke="var(--border-color)"
           strokeWidth="1"
         />
 
@@ -306,7 +234,7 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
           x2={chartWidth - padding}
           y1={getYPosition(66)}
           y2={getYPosition(66)}
-          stroke="#dc3545"
+          stroke="var(--status-bad-border)"
           strokeWidth="2"
           strokeOpacity="0.5"
           strokeDasharray="5,5"
@@ -316,7 +244,7 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
           x2={chartWidth - padding}
           y1={getYPosition(33)}
           y2={getYPosition(33)}
-          stroke="#28a745"
+          stroke="var(--status-good-border)"
           strokeWidth="2"
           strokeOpacity="0.5"
           strokeDasharray="5,5"
@@ -325,7 +253,7 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
         <text
           x={chartWidth - padding + 5}
           y={getYPosition(66) + 4}
-          fill="#dc3545"
+          fill="var(--status-bad-border)"
           fontSize="11"
           fontWeight="bold"
         >
@@ -334,7 +262,7 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
         <text
           x={chartWidth - padding + 5}
           y={getYPosition(33) + 4}
-          fill="#28a745"
+          fill="var(--status-good-border)"
           fontSize="11"
           fontWeight="bold"
         >
@@ -348,14 +276,14 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
               x2={padding}
               y1={getYPosition(percent)}
               y2={getYPosition(percent)}
-              stroke="#666"
+              stroke="var(--text-secondary)"
               strokeWidth="1"
             />
             <text
               x={padding - 10}
               y={getYPosition(percent) + 4}
               textAnchor="end"
-              fill="#666"
+              fill="var(--text-secondary)"
               fontSize="10"
             >
               {percent}%
@@ -366,7 +294,7 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
         <path
           d={generatePath()}
           fill="none"
-          stroke="#ccc"
+          stroke="var(--text-tertiary)"
           strokeWidth="2"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -401,10 +329,10 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
               r="6"
               fill={
                 point.status === "good"
-                  ? "#28a745"
+                  ? "var(--status-good-border)"
                   : point.status === "normal"
-                    ? "#ffc107"
-                    : "#dc3545"
+                    ? "var(--status-normal-border)"
+                    : "var(--status-bad-border)"
               }
               opacity="0.8"
               style={{ cursor: "pointer" }}
@@ -423,7 +351,7 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
               x={getXPosition(point.timestamp)}
               y={getYPosition(point.probability) - 12}
               textAnchor="middle"
-              fill="#333"
+              fill="var(--text-primary)"
               fontSize="8"
               fontWeight="bold"
             >
@@ -433,7 +361,7 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
               x={getXPosition(point.timestamp)}
               y={chartHeight - 20}
               textAnchor="middle"
-              fill="#666"
+              fill="var(--text-secondary)"
               fontSize="10"
             >
               {point.timestamp.toLocaleTimeString("ja-JP", {
@@ -470,6 +398,7 @@ const Page: FC = () => {
 
   return (
     <div>
+      <ThemeToggle />
       <ProbabilityChart dataPoints={dataPoints} />
     </div>
   )

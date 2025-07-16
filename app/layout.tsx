@@ -1,13 +1,28 @@
+import { ThemeProvider } from "./contexts/ThemeContext"
+import "./globals.css"
+
 export const metadata = {
-  title: "Page title",
-  description: "Page description",
+  title: "Aroma Alert - データモニタリング",
+  description: "アロマアラートシステム - リアルタイム確率モニタリング",
 }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="ja">
       <body>
-        <main>{children}</main>
+        <ThemeProvider>
+          <main
+            style={{
+              alignItems: "center",
+              display: "flex",
+              justifyContent: "center",
+              height: "100vh",
+              padding: "1rem",
+            }}
+          >
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   )
