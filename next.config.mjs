@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   output: "export",
-  basePath: "/aroma-alert",
+  basePath: process.env.NODE_ENV === "production" ? "/aroma-alert" : "",
   trailingSlash: true,
   images: {
     unoptimized: true,

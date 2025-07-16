@@ -83,41 +83,181 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
   }
 
   return (
-    <div className="chart-container">
-      <h2 className="chart-title">データモニタリング - 一次元確率表示</h2>
+    <div
+      style={{
+        maxWidth: "900px",
+        margin: "0 auto",
+        padding: "20px",
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        background: "#f8f9fa",
+        borderRadius: "12px",
+      }}
+    >
+      <h2
+        style={{
+          textAlign: "center",
+          color: "#333",
+          marginBottom: "20px",
+          fontSize: "24px",
+          fontWeight: "600",
+        }}
+      >
+        データモニタリング - 一次元確率表示
+      </h2>
 
-      <div className="threshold-info">
-        <div className="threshold-card">
-          <h3>閾値設定</h3>
-          <div className="threshold-items">
-            <div className="threshold-item good">
+      <div style={{ marginTop: "20px" }}>
+        <div
+          style={{
+            background: "#f8f9fa",
+            borderRadius: "12px",
+            padding: "15px",
+            border: "1px solid #dee2e6",
+          }}
+        >
+          <h3
+            style={{
+              margin: "0 0 12px 0",
+              color: "#333",
+              fontSize: "16px",
+              fontWeight: "600",
+            }}
+          >
+            閾値設定
+          </h3>
+          <div
+            style={{
+              display: "flex",
+              gap: "15px",
+              flexWrap: "wrap",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "6px 10px",
+                borderRadius: "6px",
+                fontSize: "14px",
+                background: "#e8f5e8",
+                color: "#155724",
+              }}
+            >
               <span>Good:</span> <strong>0% - 33%</strong>
             </div>
-            <div className="threshold-item normal">
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "6px 10px",
+                borderRadius: "6px",
+                fontSize: "14px",
+                background: "#fff8e1",
+                color: "#856404",
+              }}
+            >
               <span>Normal:</span> <strong>34% - 65%</strong>
             </div>
-            <div className="threshold-item bad">
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "6px 10px",
+                borderRadius: "6px",
+                fontSize: "14px",
+                background: "#fdf2f2",
+                color: "#721c24",
+              }}
+            >
               <span>Bad:</span> <strong>66% - 100%</strong>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="latest-measurement">
+      <div style={{ marginTop: "20px" }}>
         {dataPoints.length > 0 && (
-          <div className="measurement-card">
-            <h3>最新測定値</h3>
-            <div className="measurement-details">
-              <div className="measurement-status">
+          <div
+            style={{
+              background: "white",
+              borderRadius: "12px",
+              padding: "20px",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+              border: "1px solid #e0e0e0",
+            }}
+          >
+            <h3
+              style={{
+                margin: "0 0 15px 0",
+                color: "#333",
+                fontSize: "18px",
+                fontWeight: "600",
+              }}
+            >
+              最新測定値
+            </h3>
+            <div>
+              <div
+                style={{
+                  marginBottom: "15px",
+                  fontSize: "16px",
+                }}
+              >
                 結果:
-                <span className={`status-badge ${dataPoints[0].status}`}>
+                <span
+                  style={{
+                    padding: "4px 12px",
+                    borderRadius: "6px",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    fontSize: "14px",
+                    background:
+                      dataPoints[0].status === "good"
+                        ? "#d4edda"
+                        : dataPoints[0].status === "normal"
+                          ? "#ffe8a1"
+                          : "#f8d7da",
+                    color:
+                      dataPoints[0].status === "good"
+                        ? "#155724"
+                        : dataPoints[0].status === "normal"
+                          ? "#856404"
+                          : "#721c24",
+                  }}
+                >
                   {dataPoints[0].status}
                 </span>
               </div>
-              <div className="measurement-value">
-                <div className="value-display">
-                  <span className="value-label">確率値:</span>
-                  <span className="value-number">
+              <div style={{ marginTop: "10px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    padding: "12px 16px",
+                    background: "#f8f9fa",
+                    borderRadius: "8px",
+                    border: "1px solid #dee2e6",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontWeight: "500",
+                      color: "#666",
+                    }}
+                  >
+                    確率値:
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                      color: "#333",
+                    }}
+                  >
                     {dataPoints[0].probability.toFixed(1)}%
                   </span>
                 </div>
@@ -127,7 +267,15 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
         )}
       </div>
 
-      <svg width={chartWidth} height={chartHeight} className="chart-svg">
+      <svg
+        width={chartWidth}
+        height={chartHeight}
+        style={{
+          background: "white",
+          borderRadius: "8px",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        }}
+      >
         <defs>
           <linearGradient id="goodGradient" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#28a745" stopOpacity="0.8" />
@@ -297,175 +445,6 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
           </g>
         ))}
       </svg>
-
-      <style>{`
-        .chart-container {
-          max-width: 900px;
-          margin: 0 auto;
-          padding: 20px;
-          font-family:
-            -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-          background: #f8f9fa;
-          border-radius: 12px;
-        }
-        .chart-title {
-          text-align: center;
-          color: #333;
-          margin-bottom: 20px;
-          font-size: 24px;
-          font-weight: 600;
-        }
-        .probability-stats {
-          display: flex;
-          justify-content: center;
-          gap: 40px;
-          margin-bottom: 30px;
-        }
-        .stat {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 15px 25px;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        .stat.good {
-          background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
-          border: 2px solid #28a745;
-        }
-        .stat.normal {
-          background: linear-gradient(135deg, #fff8e1 0%, #ffe8a1 100%);
-          border: 2px solid #ffc107;
-        }
-        .stat.bad {
-          background: linear-gradient(135deg, #fdf2f2 0%, #f8d7da 100%);
-          border: 2px solid #dc3545;
-        }
-        .stat-label {
-          font-size: 14px;
-          font-weight: 500;
-          color: #666;
-          margin-bottom: 5px;
-        }
-        .stat-value {
-          font-size: 20px;
-          font-weight: bold;
-        }
-        .stat.good .stat-value {
-          color: #155724;
-        }
-        .stat.normal .stat-value {
-          color: #856404;
-        }
-        .stat.bad .stat-value {
-          color: #721c24;
-        }
-        .chart-svg {
-          background: white;
-          border-radius: 8px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .threshold-info {
-          margin-top: 20px;
-        }
-        .threshold-card {
-          background: #f8f9fa;
-          border-radius: 12px;
-          padding: 15px;
-          border: 1px solid #dee2e6;
-        }
-        .threshold-card h3 {
-          margin: 0 0 12px 0;
-          color: #333;
-          font-size: 16px;
-          font-weight: 600;
-        }
-        .threshold-items {
-          display: flex;
-          gap: 15px;
-          flex-wrap: wrap;
-        }
-        .threshold-item {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 6px 10px;
-          border-radius: 6px;
-          font-size: 14px;
-        }
-        .threshold-item.good {
-          background: #e8f5e8;
-          color: #155724;
-        }
-        .threshold-item.normal {
-          background: #fff8e1;
-          color: #856404;
-        }
-        .threshold-item.bad {
-          background: #fdf2f2;
-          color: #721c24;
-        }
-        .latest-measurement {
-          margin-top: 20px;
-        }
-        .measurement-card {
-          background: white;
-          border-radius: 12px;
-          padding: 20px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          border: 1px solid #e0e0e0;
-        }
-        .measurement-card h3 {
-          margin: 0 0 15px 0;
-          color: #333;
-          font-size: 18px;
-          font-weight: 600;
-        }
-        .measurement-status {
-          margin-bottom: 15px;
-          font-size: 16px;
-        }
-        .status-badge {
-          padding: 4px 12px;
-          border-radius: 6px;
-          font-weight: bold;
-          text-transform: uppercase;
-          font-size: 14px;
-        }
-        .status-badge.good {
-          background: #d4edda;
-          color: #155724;
-        }
-        .status-badge.normal {
-          background: #ffe8a1;
-          color: #856404;
-        }
-        .status-badge.bad {
-          background: #f8d7da;
-          color: #721c24;
-        }
-        .measurement-value {
-          margin-top: 10px;
-        }
-        .value-display {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 12px 16px;
-          background: #f8f9fa;
-          border-radius: 8px;
-          border: 1px solid #dee2e6;
-        }
-        .value-label {
-          font-weight: 500;
-          color: #666;
-        }
-        .value-number {
-          font-size: 20px;
-          font-weight: bold;
-          color: #333;
-        }
-      `}</style>
     </div>
   )
 }
