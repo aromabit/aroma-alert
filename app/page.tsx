@@ -2,7 +2,6 @@
 
 import React, { FC, useState, useEffect } from "react"
 import dynamic from "next/dynamic"
-import { useTheme } from "./contexts/ThemeContext"
 
 const Plot = dynamic(
   () => import("react-plotly.js").then((mod) => ({ default: mod.default })),
@@ -38,7 +37,7 @@ const generateMockData = (previousProbability?: number): DataPoint => {
     probability = Math.random() * 100
   } else {
     const change = (Math.random() - 0.5) * 40
-    probability = Math.max(0, Math.min(100, previousProbability + change))
+    probability = Math.max(0.5, Math.min(99.5, previousProbability + change))
   }
 
   let status: "good" | "normal" | "bad"
@@ -63,7 +62,6 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
     (a, b) => a.timestamp.getTime() - b.timestamp.getTime()
   )
 
-  // Get CSS variable values
   const getCSSVar = (varName: string) => {
     if (typeof window !== "undefined") {
       return getComputedStyle(document.documentElement)
@@ -73,7 +71,6 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
     return ""
   }
 
-  // Create plot data with theme-aware colors
   const plotData = [
     {
       x: sortedPoints.map((point) => point.timestamp),
@@ -210,8 +207,9 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
       t: 80,
       b: 60,
       l: 60,
-      r: 120,
+      r: 40,
     },
+    autosize: true,
   }
 
   const config = {
@@ -347,14 +345,18 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
           borderRadius: "8px",
           boxShadow: "0 4px 12px var(--shadow-color)",
           padding: "1rem",
+          width: "100%",
         }}
       >
-        <Plot
-          data={plotData}
-          layout={layout}
-          config={config}
-          style={{ width: "100%", height: "500px" }}
-        />
+        <div style={{ width: "100%", height: "500px" }}>
+          <Plot
+            data={plotData}
+            layout={layout}
+            config={config}
+            style={{ width: "100%", height: "100%" }}
+            useResizeHandler={true}
+          />
+        </div>
       </div>
     </div>
   )
