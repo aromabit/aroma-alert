@@ -239,7 +239,6 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
   return (
     <div
       style={{
-        background: "var(--bg-secondary)",
         borderRadius: "1rem",
         display: "flex",
         flexDirection: "column",
@@ -258,7 +257,6 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
               padding: "20px",
               boxShadow: "0 4px 12px var(--shadow-color)",
               border: "1px solid var(--border-color)",
-              marginBottom: "1rem",
             }}
           >
             <h3
@@ -303,7 +301,7 @@ const ProbabilityChart: FC<{ dataPoints: DataPoint[] }> = ({ dataPoints }) => {
                   {dataPoints[0].status}
                 </span>
               </div>
-              <div style={{ marginTop: "10px" }}>
+              <div>
                 <div
                   style={{
                     display: "flex",

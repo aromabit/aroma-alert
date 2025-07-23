@@ -12,19 +12,77 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="ja">
       <body>
         <ThemeProvider>
-          <main
+          <div
             style={{
-              alignItems: "center",
+              minHeight: "100vh",
               display: "flex",
-              justifyContent: "center",
-              height: "100vh",
-              padding: "1rem",
-              width: "100%",
+              flexDirection: "column",
             }}
           >
-            {children}
-          </main>
-          <ThemeToggle />
+            <header
+              style={{
+                background: "var(--bg-secondary)",
+                borderBottom: "1px solid var(--border-color)",
+                padding: "1rem 2rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                }}
+              >
+                <h1
+                  style={{
+                    color: "var(--text-primary)",
+                    fontSize: "1.5rem",
+                    fontWeight: "600",
+                    margin: 0,
+                  }}
+                >
+                  Aroma Alert
+                </h1>
+              </div>
+              <ThemeToggle />
+            </header>
+
+            <main
+              style={{
+                flex: 1,
+                alignItems: "center",
+                display: "flex",
+                justifyContent: "center",
+                padding: "1rem",
+                width: "100%",
+              }}
+            >
+              {children}
+            </main>
+
+            <footer
+              style={{
+                background: "var(--bg-secondary)",
+                borderTop: "1px solid var(--border-color)",
+                padding: "1rem 2rem",
+                textAlign: "center",
+                color: "var(--text-secondary)",
+                fontSize: "0.875rem",
+              }}
+            >
+              <img
+                src="/logo.png"
+                alt="Aroma Bit Logo"
+                style={{ height: "1.5rem" }}
+              />
+              <p style={{ padding: ".5rem" }}>
+                © 2025 Aroma Bit, Inc. All rights reserved.
+              </p>
+            </footer>
+          </div>
         </ThemeProvider>
       </body>
     </html>

@@ -19,10 +19,7 @@ const ThemeToggle: React.FC = () => {
     <button
       onClick={toggleTheme}
       style={{
-        position: "fixed",
-        top: "20px",
-        right: "20px",
-        background: "var(--bg-secondary)",
+        background: "var(--bg-tertiary)",
         border: "1px solid var(--border-color)",
         borderRadius: "8px",
         padding: "8px 12px",
@@ -34,7 +31,6 @@ const ThemeToggle: React.FC = () => {
         fontWeight: "500",
         color: "var(--text-primary)",
         transition: "all 0.2s ease",
-        zIndex: 1000,
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "scale(1.05)"
