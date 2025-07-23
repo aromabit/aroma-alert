@@ -74,7 +74,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               }}
             >
               <img
-                src="/logo.png"
+                src="./logo.png"
                 alt="Aroma Bit Logo"
                 style={{ height: "1.5rem" }}
               />
